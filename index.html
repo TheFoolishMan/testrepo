@@ -1,0 +1,69 @@
+
+<html><head>
+        <title>test96</title>
+        <script src="3Dmol.js"></script>               
+        </head>
+        
+        <body style="margin:0;padding:0">
+    
+<div id='gldiv' style='width: 100vw; height: 100vh; position: relative;'></div>
+<script>var viewer=$3Dmol.createViewer($("#gldiv"));</script>
+<script>
+        var callback = function() {};
+        
+console.log("started "  + "ms");
+    
+
+      $.get("http://files.rcsb.org/view/1ycr.pdb", function(ret, txt, response) {
+                                    console.log("alt fetch "  + "ms");
+                                   // var time = new Date();
+                                    viewer.addModel(ret, "pdb");
+                                    //runcmds(cmds, glviewer);
+																		viewer.setStyle({},{sphere:{}});
+                                    viewer.zoomTo();
+                                    viewer.render();
+                                    console.log("alt load " + "ms");
+}); 
+
+
+/*
+var viewer = new $3Dmol.createStereoViewer("gldiv");
+console.log("second "  + "ms");
+    $.get("http://3dmol.csb.pitt.edu/tests/auto/data/TC5b.prmtop",
+        function(data) {
+            var models = viewer.addModel(data, "prmtop");
+            $.get("http://3dmol.csb.pitt.edu/tests/auto/data/heat1.mdcrd", 
+            function(data) {
+                viewer.setCoordinates(models, data, "mdcrd");
+                viewer.setStyle({},{sphere:{}});
+                viewer.zoomTo();
+                var dist = viewer.getPerceivedDistance();
+                viewer.setPerceivedDistance(dist[0]-10); //useful for zooming in or out
+                viewer.setAutoEyeSeparation(); //optional. changes the camera x value
+                viewer.render(callback);
+            });
+        });
+				
+				*/
+				
+				var viewer = new $3Dmol.createStereoViewer("gldiv");
+console.log("second "  + "ms");
+    $.get("http://files.rcsb.org/view/1ycr.pdb", function(ret, txt, response) {
+            viewer.addModel(ret, "pdb");
+            
+                
+                viewer.setStyle({},{sphere:{}});
+                viewer.zoomTo();
+                var dist = viewer.getPerceivedDistance();
+                viewer.setPerceivedDistance(dist[0]-10); //useful for zooming in or out
+                viewer.setAutoEyeSeparation(); //optional. changes the camera x value
+                viewer.render(callback);
+            
+        });
+
+
+
+console.log("end "  + "ms");
+        </script>        
+        </body>
+    </html>
