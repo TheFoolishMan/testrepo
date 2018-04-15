@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gyro tester</title>
+
+</head>
+<body>
+
+<div id="header">3Dmol Viewer</div>
+<div id="decider">3Dmol Viewer</div>
+<div id="decider">3Dmol Viewer</div>
+<button id="texty" onclick="changeRotate()">
+Rotate
+</button>
+<script src="gyronorm.complete.min.js"></script>
+<script>
+var gn = new GyroNorm();
+var rotate = false;
+var element = document.getElementById("header");
+element.innerHTML = "UPDATED";
+
+var element2 = document.getElementById("decider");
+element2.innerHTML = "undecided";
+
+var element3 = document.getElementById("decider");
+element3.innerHTML = "gyro";
+var counter = 0;
+
+var func1 = function(){
+	counter++;
+	element.innerHTML = "UPDATED counter "+counter;
+	window.requestAnimationFrame(func1);
+}
+func1();
+
+var func2 = function(){
+	if(rotate)
+	element2.innerHTML = "true";
+	else
+	element2.innerHTML = "false";
+	window.requestAnimationFrame(func2);
+}
+func2();
+
+var changeRotate = function(){
+	if(rotate)
+	rotate = false;
+	else
+	rotate = true;
+	document.documentElement.webkitRequestFullscreen();
+}
+
+gn.init().then(function(){
+  gn.start(function(data){
+    // Process:
+    // data.do.alpha	( deviceorientation event alpha value )
+    // data.do.beta		( deviceorientation event beta value )
+    // data.do.gamma	( deviceorientation event gamma value )
+    // data.do.absolute	( deviceorientation event absolute value )
+		element3.innerHTML = data.do.alpha;
+		console.log("calling");
+    
+  });
+}).catch(function(e){
+  // Catch if the DeviceOrientation or DeviceMotion is not supported by the browser or device
+});
+
+</script>
+
+</body>
+</html>
