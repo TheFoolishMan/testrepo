@@ -7,7 +7,7 @@
         <body style="margin:0;padding:0">
     <div id="header">3Dmol Viewer</div>
 		<input id="ranger" type="range" max="360" min="0"></input>
-<div id='gldiv' style='width: 100vw; height: 100vh; position: relative;'></div>
+<div id='gldiv' style='width: 100vw; height: 100vh; position: relative;' onclick="fully()"></div>
 <script>var viewer=$3Dmol.createViewer($("#gldiv"));</script>
 <script src="gyronorm.complete.min.js"></script>
 <script>
@@ -75,9 +75,11 @@ var inity = 5;
 		
 	}
 	console.log(inity+"hey"+alphy);
-}, 1000);
+}, 50);
 
-
+var fully = function(){
+document.documentElement.webkitRequestFullscreen();
+}
         </script>        
         </body>
     </html>
