@@ -1,56 +1,73 @@
 
-<html><head>
-        <title>test96</title>
-        <script src="https://3dmol.csb.pitt.edu/build/3Dmol.js"></script>               
-        </head>
+<html>
+<head>
+	<title>Rotating Molecule</title>
+	<script src="https://3dmol.csb.pitt.edu/build/3Dmol.js"></script>
+	<script src="gyronorm.complete.min.js"></script>	
+</head>
         
-        <body style="margin:0;padding:0">
-    <div id="header">3Dmol Viewer</div>
-		<input id="ranger" type="range" max="360" min="0"></input>
+<body style="margin:0;padding:0">
+
+<div id="header">3Dmol Viewer</div>
+<!--<input id="ranger" type="range" max="360" min="0"></input>-->
 <div id='gldiv' style='width: 100vw; height: 100vh; position: relative;' onclick="fully()"></div>
-<script>var viewer=$3Dmol.createViewer($("#gldiv"));</script>
-<script src="gyronorm.complete.min.js"></script>
+
+
 <script>
-var element = document.getElementById("header");
-var rele = document.getElementById("ranger");
-/*element.innerHTML = rele.value;
-var init = rele.value;
-*/
-
-        var callback = function() {};
-        
-
-    var viewer = new $3Dmol.createStereoViewer("gldiv");
-
-    $.get("https://3dmol.csb.pitt.edu/tests/auto/data/TC5b.prmtop",
-        function(data) {
-            var models = viewer.addModel(data, "prmtop");
-            $.get("https://3dmol.csb.pitt.edu/tests/auto/data/heat1.mdcrd", 
-            function(data) {
-                viewer.setCoordinates(models, data, "mdcrd");
-                viewer.setStyle({},{sphere:{}});
-                viewer.zoomTo();
-                var dist = viewer.getPerceivedDistance();
-                viewer.setPerceivedDistance(dist[0]-10); //useful for zooming in or out
-                viewer.setAutoEyeSeparation(); //optional. changes the camera x value
-                viewer.render(callback);
-            });
-        });
+	var element = document.getElementById("header");
+	var rele = document.getElementById("ranger");
+	var callback = function() {};
+  var viewer = new $3Dmol.createStereoViewer("gldiv");
+	/*$.get("https://3dmol.csb.pitt.edu/tests/auto/data/TC5b.prmtop",
+		function(data) 
+		{
+			var models = viewer.addModel(data, "prmtop");
+			$.get("https://3dmol.csb.pitt.edu/tests/auto/data/heat1.mdcrd", 
+				function(data) 
+				{
+					viewer.setCoordinates(models, data, "mdcrd");
+					viewer.setStyle({},{sphere:{}});
+					viewer.zoomTo();
+					var dist = viewer.getPerceivedDistance();
+					viewer.setPerceivedDistance(dist[0]-10); //useful for zooming in or out
+					viewer.setAutoEyeSeparation(); //optional. changes the camera x value
+					viewer.render(callback);
+				}
+			);	
+		}
+	);
+	*/
+      $.get("https://files.rcsb.org/view/1ycr.pdb", function(ret, txt, response) {
+				console.log("alt fetch "  + "ms");
+			 // var time = new Date();
+				viewer.addModel(ret, "pdb");
+				//runcmds(cmds, glviewer);
+				viewer.setStyle({},{cartoon:{}});
+				viewer.zoomTo();
+				var dist = viewer.getPerceivedDistance();
+					viewer.setPerceivedDistance(dist[0]-10); //useful for zooming in or out
+					viewer.setAutoEyeSeparation(); //optional. changes the camera x value
+					viewer.render(callback);
+				
+				console.log("alt load " + "ms");
+}); 
 
 /*
-				setInterval(function() {
-	if(rele.value-init!=0){
-    viewer.rotate(init-rele.value);
-		init = rele.value;
-		
-	}
-}, 50);
+	setInterval(function() {
+		if(rele.value-init!=0){
+			viewer.rotate(init-rele.value);
+			init = rele.value;
+		}
+	}, 50);
 
 */
-var alphy;
-var gn = new GyroNorm();
-gn.init().then(function(){
-  gn.start(function(data){
+
+	var alphy;
+	var gn = new GyroNorm();
+	gn.init().then(
+		function()
+		{
+			gn.start(function(data){
     // Process:
     // data.do.alpha	( deviceorientation event alpha value )
     // data.do.beta		( deviceorientation event beta value )
@@ -80,6 +97,7 @@ var inity = 5;
 var fully = function(){
 document.documentElement.webkitRequestFullscreen();
 }
-        </script>        
-        </body>
-    </html>
+        
+</script>        
+</body>
+</html>
