@@ -22,10 +22,10 @@ var init = rele.value;
 
     var viewer = new $3Dmol.createStereoViewer("gldiv");
 
-    $.get("http://3dmol.csb.pitt.edu/tests/auto/data/TC5b.prmtop",
+    $.get("https://3dmol.csb.pitt.edu/tests/auto/data/TC5b.prmtop",
         function(data) {
             var models = viewer.addModel(data, "prmtop");
-            $.get("http://3dmol.csb.pitt.edu/tests/auto/data/heat1.mdcrd", 
+            $.get("https://3dmol.csb.pitt.edu/tests/auto/data/heat1.mdcrd", 
             function(data) {
                 viewer.setCoordinates(models, data, "mdcrd");
                 viewer.setStyle({},{sphere:{}});
