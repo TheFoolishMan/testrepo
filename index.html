@@ -56,9 +56,9 @@ gn.init().then(function(){
     // data.do.beta		( deviceorientation event beta value )
     // data.do.gamma	( deviceorientation event gamma value )
     // data.do.absolute	( deviceorientation event absolute value )
-		element.innerHTML = data.do.alpha;
+		
 		alphy = data.do.alpha;
-		console.log("calling");
+		element.innerHTML = alphy+" ";
     
   });
 }).catch(function(e){
@@ -66,15 +66,15 @@ gn.init().then(function(){
 });
 
 element.innerHTML = alphy;
-var init = alphy;
+var inity = 5;
 	setInterval(function() {
-	if(alphy-init!=0 && alphy!=undefined && init!=undefined){
-    viewer.rotate(init-alphy);
-	console.log(init+"hey"+alphy);
-		init = alphy;
+	if(alphy-inity!=0 && alphy!=undefined && inity!=undefined){
+    viewer.rotate(inity-alphy);
+	console.log(inity+"heyaa"+alphy);
+		inity = alphy;
 		
 	}
-	console.log(init+"hey"+alphy);
+	console.log(inity+"hey"+alphy);
 }, 50);
 
 
